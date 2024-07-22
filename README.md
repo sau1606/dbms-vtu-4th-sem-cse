@@ -319,3 +319,222 @@ dbms-vtu-4th-sem-cse
                                     *
     ERROR at line 1:
     ORA-01400: cannot insert NULL into ("SYSTEM"."EMPLOYEE"."ENAME
+
+# 2nd program
+
+        SQL*Plus: Release 11.2.0.2.0 Production on Mon Jul 22 22:46:17 2024
+        
+        Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+        
+        SQL> connect system
+        Enter password:
+        Connected.
+        SQL> desc employee;
+         Name                                      Null?    Type
+         ----------------------------------------- -------- ----------------------------
+         EID                                       NOT NULL NUMBER(10)
+         ENAME                                     NOT NULL VARCHAR2(20)
+         JOB                                                CHAR(20)
+         MANAGER_NO                                         NUMBER
+         SAL                                                NUMBER(10,2)
+         COMM                                               NUMBER(10,2)
+        
+        SQL> select * from employee;
+        
+               EID ENAME                JOB                  MANAGER_NO        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 2 sham                 dev                           1       4000
+        
+        
+        
+        SQL> delete from table employee where eid=2;
+        delete from table employee where eid=2
+                    *
+        ERROR at line 1:
+        ORA-00903: invalid table name
+        
+        
+        SQL> delete from employee where eid=2;
+        
+        1 row deleted.
+        
+        SQL> select * from employee;
+        
+        no rows selected
+        
+        SQL> desc epmloyee;
+        ERROR:
+        ORA-04043: object epmloyee does not exist
+        
+        
+        SQL> desc employee;
+         Name                                      Null?    Type
+         ----------------------------------------- -------- ----------------------------
+         EID                                       NOT NULL NUMBER(10)
+         ENAME                                     NOT NULL VARCHAR2(20)
+         JOB                                                CHAR(20)
+         MANAGER_NO                                         NUMBER
+         SAL                                                NUMBER(10,2)
+         COMM                                               NUMBER(10,2)
+        
+        SQL> alter table employee
+          2  drop column comm;
+        
+        Table altered.
+        
+        SQL> desc employee;
+         Name                                      Null?    Type
+         ----------------------------------------- -------- ----------------------------
+         EID                                       NOT NULL NUMBER(10)
+         ENAME                                     NOT NULL VARCHAR2(20)
+         JOB                                                CHAR(20)
+         MANAGER_NO                                         NUMBER
+         SAL                                                NUMBER(10,2)
+        
+        SQL> alter table employee
+          2  add comm number(10,2);
+        
+        Table altered.
+        
+        SQL> desc employee;
+         Name                                      Null?    Type
+         ----------------------------------------- -------- ----------------------------
+         EID                                       NOT NULL NUMBER(10)
+         ENAME                                     NOT NULL VARCHAR2(20)
+         JOB                                                CHAR(20)
+         MANAGER_NO                                         NUMBER
+         SAL                                                NUMBER(10,2)
+         COMM                                               NUMBER(10,2)
+        
+        SQL> insert all
+          2  into employee values(1,'sau','dev',1,100,5)
+          3  into employee values(2,'sham','dev',null,200,6)
+          4  into employee values(3,'shamu','dev',2,300,7)
+          5  into employee values(4,'shambhavi','dev',null,400,8)
+          6  into employee values(5,'sausham','dev',null,400,9)
+          7  select * from dual;
+        
+        5 rows created.
+        
+        SQL> select * from employee;
+        
+               EID ENAME                JOB                  MANAGER_NO        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 1 sau                  dev                           1        100
+                 5
+        
+                 2 sham                 dev                                    200
+                 6
+        
+                 3 shamu                dev                           2        300
+                 7
+        
+        
+               EID ENAME                JOB                  MANAGER_NO        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 4 shambhavi            dev                                    400
+                 8
+        
+                 5 sausham              dev                                    400
+                 9
+        
+        
+        SQL> update employee
+          2  set job='analyst'
+          3  where eid=4;
+        
+        1 row updated.
+        
+        SQL> select * from employee;
+        
+               EID ENAME                JOB                  MANAGER_NO        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 1 sau                  dev                           1        100
+                 5
+        
+                 2 sham                 dev                                    200
+                 6
+        
+                 3 shamu                dev                           2        300
+                 7
+        
+        
+               EID ENAME                JOB                  MANAGER_NO        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 4 shambhavi            analyst                                400
+                 8
+        
+                 5 sausham              dev                                    400
+                 9
+        
+        
+        SQL> alter table employee rename column manager_no to mgr;
+        
+        Table altered.
+        
+        SQL> select * from employee;
+        
+               EID ENAME                JOB                         MGR        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 1 sau                  dev                           1        100
+                 5
+        
+                 2 sham                 dev                                    200
+                 6
+        
+                 3 shamu                dev                           2        300
+                 7
+        
+        
+               EID ENAME                JOB                         MGR        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 4 shambhavi            analyst                                400
+                 8
+        
+                 5 sausham              dev                                    400
+                 9
+        
+        
+        SQL> delete from employee where eid=4;
+        
+        1 row deleted.
+        
+        SQL> select * from employee;
+        
+               EID ENAME                JOB                         MGR        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 1 sau                  dev                           1        100
+                 5
+        
+                 2 sham                 dev                                    200
+                 6
+        
+                 3 shamu                dev                           2        300
+                 7
+        
+        
+               EID ENAME                JOB                         MGR        SAL
+        ---------- -------------------- -------------------- ---------- ----------
+              COMM
+        ----------
+                 5 sausham              dev                                    400
+                 9
+        
+        
+        SQL>
