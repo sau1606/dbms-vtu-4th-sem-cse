@@ -538,3 +538,72 @@ dbms-vtu-4th-sem-cse
         
         
         SQL>
+
+# 5th program
+            
+    SQL*Plus: Release 11.2.0.2.0 Production on Mon Jul 22 23:09:15 2024
+    
+    Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+    
+    SQL> connect system
+    Enter password:
+    Connected.
+    SQL> desc emp;
+     Name                                      Null?    Type
+     ----------------------------------------- -------- ----------------------------
+     EID                                       NOT NULL NUMBER(10)
+     ENAME                                              CHAR(20)
+     AGE                                       NOT NULL NUMBER(10)
+     SALARY                                             NUMBER(10,3)
+    
+    SQL> select * from emp;
+    
+    no rows selected
+    
+    SQL> show tables;
+    SP2-0158: unknown SHOW option "tables"
+    SQL> show table;
+    SP2-0158: unknown SHOW option "table"
+    SQL> insert all
+      2  into emp values(1,'sau',20,100)
+      3  into emp values(2,'sham',21,200)
+      4  into emp values(3,'saurav',22,300) select * from dual;
+    
+    3 rows created.
+    
+    SQL> select * from emp;
+    
+           EID ENAME                       AGE     SALARY
+    ---------- -------------------- ---------- ----------
+             1 sau                          20        100
+             2 sham                         21        200
+             3 saurav                       22        300
+    
+    SQL> set serveroutput on;
+    SQL> declare
+      2  cursor empl is select salary, ename from emp;
+      3  salary number(10,3);
+      4  ename char(20);
+      5  begin
+      6  open empl;
+      7  if empl%isopen then
+      8  dbms_output.put_line('cursor is open');
+      9  end if;
+     10  loop
+     11  fetch empl into salary, ename;
+     12  exit when empl%notfound;
+     13  dbms_output.put_line(salary||' '||ename);
+     14  end loop;
+     15  dbms_output.put_line(empl%rowcount||'row has been returned');
+     16  close empl;
+     17  end;
+     18  /
+    cursor is open
+    100 sau
+    200 sham
+    300 saurav
+    3row has been returned
+    
+    PL/SQL procedure successfully completed.
+    
+    SQL>
